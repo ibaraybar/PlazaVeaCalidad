@@ -1,0 +1,124 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 60px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* erickpm */
+
+.navbar{
+	background: #FF142D;
+	border-bottom: 2px solid #F4D016;
+	-webkit-box-shadow: #ccc 0px 5px 3px -3px; /*color x y blur*/
+	-moz-box-shadow: #ccc 0px 5px 3px -3px;
+	box-shadow: #ccc 0px 5px 3px -3px;
+}
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a{
+	color: white;
+}
+.navbar-inverse .navbar-brand:HOVER, .navbar-inverse .navbar-nav>li>a:HOVER{
+	color: #F4D016;
+}
+.navbar-inverse .navbar-toggle, .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{
+	border-color: #F4D016;
+}
+.navbar-inverse .navbar-toggle:HOVER, .navbar-inverse .navbar-toggle:FOCUS{
+	background-color: #F4D016;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
+    background-color: #F4D016;
+}
+
+.navbar-logo{
+	padding: 0px 10px 0px 10px;
+	display: none;
+	margin-right: 15px;
+}
+
+.navbar .btn-sidebar{
+    float: left;
+    margin-left: 10px;
+    margin-top: 8px;
+}
+
+@media (min-width: 768px) {
+	.navbar-logo{
+		display: inherit;
+	}
+	.navbar .btn-sidebar{
+	    display: none;
+	}
+}
+
+.sidebar, .main{
+	margin-bottom: 0px;
+}
+
+.sidebar a{
+	color: #333;
+}
+
+.nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus{
+	background-color: lightgray;
+}
+
+#content{
+    padding: 10px;
+    min-height: 200px;
+    margin-bottom: 40px;
+}
+
+#footer{
+    position: inherit;
+    bottom: 0;
+    width: 100%;
+    
+    background: #DADADA; /* Old browsers */
+    
+    border-top: white;
+    
+    -webkit-box-shadow: #666 0px -4px 3px -3px; /*color x y blur*/
+    -moz-box-shadow: #666 0px -4px 3px -3px;
+    box-shadow: #666 0px -4px 5px -3px;
+    
+    color: #373737; /* color de texto*/
+    line-height: 40px;
+    text-align: center; /*alineamiento horizontal*/
+    font-weight: bold; /* texto en negrita */
+    font-size: 13px;
+    z-index: 9999;
+}
+
+@media (min-width: 768px) {
+	#footer{
+		position: fixed;
+	}
+	.sidebar, .main{
+		margin-bottom: 40px;
+	}
+}
+
+.container-fluid .row {
+    margin-right: 0px;
+}
+
