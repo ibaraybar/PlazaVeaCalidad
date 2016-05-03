@@ -21,8 +21,8 @@
 
 		<form>
 			<div class="row form-group">
-				<label for="numero" class="col-sm-2 control-label">Nro de Ticket</label>
-				<div class="col-sm-10">
+				<label for="numero" class="col-sm-2 control-label">Pol&iacute;tica de Calidad:</label>
+				<div class="col-md-10">
 					<input type="text" name="numero" class="form-control" />
 				</div>
 			</div>
