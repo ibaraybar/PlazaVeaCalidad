@@ -11,7 +11,7 @@
 <body>
 	<%@include file="include/menu.jsp" %>
 
-	<div class="container-fluid">
+	<div class="container">
         	
 		<!-- Inicio del contenido -->
 		<div class="page-header">
@@ -19,138 +19,63 @@
 			Criterios de B&uacute;squeda
 		</div>
 
-		<form>
-			<div class="row form-group">
-				<label for="numero" class="col-sm-2 control-label">Pol&iacute;tica de Calidad:</label>
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="col-md-2 control-label" for="lblpolitica" id="lblpolitica">Pol&iacute;tica de Calidad:</label>
 				<div class="col-md-10">
-					<input type="text" name="numero" class="form-control" />
+					<input class="form-control" type="text" name="txtpolitica" id="txtpolitica" />
 				</div>
 			</div>
 			
-			<div class="row form-group">
-				<label for="fecha" class="col-sm-2 control-label">Fecha de asignación</label>
-				<div class="col-sm-10">
-					<input type="text" name="fecha" class="form-control" />
+			<div class="form-group">
+				<label for="lblanio" class="col-md-1 control-label">Año:</label>
+				<label for="lbldesde" class="col-md-1 control-label">Desde:</label>
+				<div class="col-md-2">
+					<input type="text" name="anioDesde" id="anioDesde" class="form-control" />
+				</div>
+				<label for="lblhasta" class="col-md-1 control-label">Hasta:</label>
+				<div class="col-md-2">
+					<input type="text" name="anioHasta" id="anioHasta" class="form-control" />
+				</div>
+				<label for="lblestado" class="col-md-1 control-label">Estado:</label>
+				<div class="col-md-3">
+					<select name="estado" id="estado" class="form-control">
+					  <option value="all">Todos</option>
+					  <option value="activo">Activo</option>
+					  <option value="inactivo">Inactivo</option>
+					</select>
 				</div>
 			</div>
 			
-			<div class="row form-group">
-				<div class="col-sm-2">
-					
+			<div class="form-group">
+				<div class="col-md-offset-10 col-md-1">
+					<input type="submit" value="Buscar" class="btn btn-primary" />
 				</div>
-				<div class="col-sm-10">
-					<input type="submit" value="Grabar Documento" class="btn btn-primary" />
+				<div class="col-md-1">
+					<input type="submit" value="Limpiar" class="btn btn-primary" />
 				</div>
 			</div>
 		</form>
 		
-		<hr/>
-		
-		<div class="table-responsive">
-			<table class="table table-hover">
-				<colgroup>
-					<col width="100"/>
-					<col />
-					<col />
-					<col width="100"/>
-					<col width="100"/>
-					<col width="100"/>
-				</colgroup>
-				<thead>
+		<div class="row">
+		   	<div class="col-md-12">
+		   		<div class="table-responsive">
+				<table class="table table-striped table-bordered table-hover">
 					<tr>
-						<td>Número</td>
-						<td>Nombre</td>
-						<td>Correo</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<th>C&oacute;digo</th>
+						<th>Pol&iacute;tica de Calidad</th>
+						<th>Año</th>
+						<th>Estado</th>
+						<th>Acciones</th>
 					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>MD-1481</td>
-						<td>Jorge Bernardo</td>
-						<td>jbernardo@gmail.com</td>
-						<td><a href="#" class="btn btn-info">Mostrar</a></td>
-						<td><a href="#" class="btn btn-warning">Editar</a></td>
-						<td><a href="#" class="btn btn-danger">Eliminar</a></td>
-					</tr>
-					<tr>
-						<td>MD-1481</td>
-						<td>Jorge Bernardo</td>
-						<td>jbernardo@gmail.com</td>
-						<td><a href="#" class="btn btn-info">Mostrar</a></td>
-						<td><a href="#" class="btn btn-warning">Editar</a></td>
-						<td><a href="#" class="btn btn-danger">Eliminar</a></td>
-					</tr>
-					<tr>
-						<td>MD-1481</td>
-						<td>Jorge Bernardo</td>
-						<td>jbernardo@gmail.com</td>
-						<td><a href="#" class="btn btn-info">Mostrar</a></td>
-						<td><a href="#" class="btn btn-warning">Editar</a></td>
-						<td><a href="#" class="btn btn-danger">Eliminar</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		
-		<hr/>
-		
-		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-ejemplo-1">
-			Ejemplo de ventana modal
-		</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="modal-ejemplo-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-			  <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Título del Modal</h4>
-			  </div>
-			  <div class="modal-body">
-			  
-				Algún contneido ...
-				
-			  </div>
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-				<button type="button" class="btn btn-primary">Aceptar</button>
-			  </div>
+				</table>
+				</div>
 			</div>
-		  </div>
 		</div>
+	</div>
 		
-		<!-- Fin de contenido -->
-			
-			
-    </div>
-
     <div id="footer">
         Todos los Derechos Reservados 2016
-    </div>
-
-    <div id="modal-alert" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">Advertencia</h4>
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-
-            </div>
-        </div>
     </div>
 </body>
 </html>
