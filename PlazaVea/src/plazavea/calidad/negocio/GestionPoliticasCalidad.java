@@ -1,0 +1,16 @@
+package plazavea.calidad.negocio;
+
+import java.util.Collection;
+
+import plazavea.calidad.dao.PoliticaCalidadDAO;
+import plazavea.calidad.excepcion.DAOExcepcion;
+import plazavea.calidad.modelo.PoliticaCalidad;
+
+public class GestionPoliticasCalidad {
+
+	public Collection<PoliticaCalidad> listar() throws DAOExcepcion {
+		PoliticaCalidadDAO dao = new PoliticaCalidadDAO();
+
+		return dao.listar();
+	}
+}

@@ -25,7 +25,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mantenimiento <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="politicas-consulta.jsp">Políticas Internas de Calidad</a></li>
+                            <li><a href="ConsultarPoliticasCalidadServlet">Políticas Internas de Calidad</a></li>
                             <li><a href="#">Mantenimiento de Tarjetas</a></li>
                             <li><a href="#">Mantenido</a></li>
                             <li role="separator" class="divider"></li>

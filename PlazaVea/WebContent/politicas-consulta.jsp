@@ -19,7 +19,7 @@
 			Criterios de B&uacute;squeda
 		</div>
 
-		<form class="form-horizontal" role="form">
+		<form class="form-horizontal" role="form" method="post" action="ConsultarPoliticasCalidadServlet">
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="lblpolitica" id="lblpolitica">Pol&iacute;tica de Calidad:</label>
 				<div class="col-md-10">
@@ -68,6 +68,25 @@
 						<th>Estado</th>
 						<th>Acciones</th>
 					</tr>
+					
+					<%@page import="java.util.ArrayList, plazavea.calidad.modelo.PoliticaCalidad"%>
+					<%
+						
+						ArrayList<PoliticaCalidad> pcalidad = (ArrayList<PoliticaCalidad>) request.getAttribute("PCALIDAD_REGISTRADAS");
+						
+						if (pcalidad != null) {
+							for (PoliticaCalidad x : pcalidad) {							
+								out.println("<tr>");
+								out.println("<td align='center'>" + x.getIdPolitica() + "</td>");
+								out.println("<td>" + x.getNombre() + "</td>");
+								out.println("<td align='center'>" + x.getAnio() + "</td>");
+								out.println("<td align='center'>" + x.getDescripcionActivo() + "</td>");
+								out.println("<td><a href='#' class='btn btn-warning'>Editar</a> <a href='#' class='btn btn-danger'>Eliminar</a> <a href='#' class='btn btn-info'>Detalle</a></td>");
+								out.println("</tr>");
+							}
+						} 	
+					%>
+					
 				</table>
 				</div>
 			</div>
