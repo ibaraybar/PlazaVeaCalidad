@@ -58,11 +58,14 @@ public class ConsultarPoliticasCalidadServlet extends HttpServlet {
 		String anioDesde = request.getParameter("txtanioDesde");
 		String anioHasta = request.getParameter("txtanioHasta");
 		String estado = request.getParameter("selestado");
+		int desde = Integer.parseInt("0" + anioDesde);
+		int hasta = Integer.parseInt("0" + anioHasta);
+		if (hasta == 0) { hasta=2016; }
 		
 		GestionPoliticasCalidad negocioPCal = new GestionPoliticasCalidad();
 		try {
-			Collection<PoliticaCalidad> listaPCal = negocioPCal.buscar(politicaCalidad, Integer.parseInt(anioDesde), 
-					Integer.parseInt(anioHasta), Integer.parseInt(estado));
+			Collection<PoliticaCalidad> listaPCal = negocioPCal.buscar(politicaCalidad.trim(), desde, 
+					hasta, Integer.parseInt(estado));
 			// Guardar en el ambiente de request
 			request.setAttribute("PCALIDAD_REGISTRADAS", listaPCal);
 			RequestDispatcher rd = request.getRequestDispatcher("politicas-consulta.jsp");
