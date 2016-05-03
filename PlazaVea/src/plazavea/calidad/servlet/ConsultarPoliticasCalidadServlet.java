@@ -54,7 +54,25 @@ public class ConsultarPoliticasCalidadServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String politicaCalidad = request.getParameter("txtpolitica");
+		String anioDesde = request.getParameter("txtanioDesde");
+		String anioHasta = request.getParameter("txtanioHasta");
+		String estado = request.getParameter("selestado");
+		
+		GestionPoliticasCalidad negocioPCal = new GestionPoliticasCalidad();
+		try {
+			Collection<PoliticaCalidad> listaPCal = negocioPCal.buscar(politicaCalidad, Integer.parseInt(anioDesde), 
+					Integer.parseInt(anioHasta), Integer.parseInt(estado));
+			// Guardar en el ambiente de request
+			request.setAttribute("PCALIDAD_REGISTRADAS", listaPCal);
+			RequestDispatcher rd = request.getRequestDispatcher("politicas-consulta.jsp");
+			rd.forward(request, response);
+
+		} catch (DAOExcepcion e) {
+			System.out.println(e.getMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 }

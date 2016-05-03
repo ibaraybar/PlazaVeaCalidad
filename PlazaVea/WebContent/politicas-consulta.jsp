@@ -31,28 +31,31 @@
 				<label for="lblanio" class="col-md-1 control-label">Año:</label>
 				<label for="lbldesde" class="col-md-1 control-label">Desde:</label>
 				<div class="col-md-2">
-					<input type="text" name="anioDesde" id="anioDesde" class="form-control" />
+					<input type="text" name="txtanioDesde" id="txtanioDesde" class="form-control" />
 				</div>
 				<label for="lblhasta" class="col-md-1 control-label">Hasta:</label>
 				<div class="col-md-2">
-					<input type="text" name="anioHasta" id="anioHasta" class="form-control" />
+					<input type="text" name="txtanioHasta" id="txtanioHasta" class="form-control" />
 				</div>
 				<label for="lblestado" class="col-md-1 control-label">Estado:</label>
 				<div class="col-md-3">
-					<select name="estado" id="estado" class="form-control">
-					  <option value="all">Todos</option>
-					  <option value="activo">Activo</option>
-					  <option value="inactivo">Inactivo</option>
+					<select name="selestado" id="selestado" class="form-control">
+					  <option value="0">Todos</option>
+					  <option value="1">Activo</option>
+					  <option value="2">Inactivo</option>
 					</select>
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<div class="col-md-offset-10 col-md-1">
+				<div class="col-md-offset-8 col-md-1">
 					<input type="submit" value="Buscar" class="btn btn-primary" />
 				</div>
 				<div class="col-md-1">
 					<input type="submit" value="Limpiar" class="btn btn-primary" />
+				</div>
+				<div class="col-md-2">
+					<input type="submit" value="Crear Política Calidad" class="btn btn-primary" />
 				</div>
 			</div>
 		</form>
@@ -81,7 +84,7 @@
 								out.println("<td>" + x.getNombre() + "</td>");
 								out.println("<td align='center'>" + x.getAnio() + "</td>");
 								out.println("<td align='center'>" + x.getDescripcionActivo() + "</td>");
-								out.println("<td><a href='#' class='btn btn-warning'>Editar</a> <a href='#' class='btn btn-danger'>Eliminar</a> <a href='#' class='btn btn-info'>Detalle</a></td>");
+								out.println("<td align='center'><a href='#' class='btn btn-warning'>Editar</a> <a href='#' class='btn btn-danger'>Eliminar</a> <a href='#' class='btn btn-info'>Detalle</a></td>");
 								out.println("</tr>");
 							}
 						} 	
