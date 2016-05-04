@@ -16,16 +16,16 @@ import plazavea.calidad.modelo.PoliticaCalidad;
 import plazavea.calidad.negocio.GestionPoliticasCalidad;
 
 /**
- * Servlet implementation class ConsultarPoliticasCalidadServlet
+ * Servlet implementation class PoliticaCalidadServlet
  */
-@WebServlet("/ConsultarPoliticasCalidadServlet")
-public class ConsultarPoliticasCalidadServlet extends HttpServlet {
+@WebServlet("/PoliticaCalidadServlet")
+public class PoliticaCalidadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConsultarPoliticasCalidadServlet() {
+    public PoliticaCalidadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,7 +40,7 @@ public class ConsultarPoliticasCalidadServlet extends HttpServlet {
 			Collection<PoliticaCalidad> listaPCal = negocioPCal.listar();
 			// Guardar en el ambiente de request
 			request.setAttribute("PCALIDAD_REGISTRADAS", listaPCal);
-			RequestDispatcher rd = request.getRequestDispatcher("politicas-consulta.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("politica-calidad.jsp");
 			rd.forward(request, response);
 
 		} catch (DAOExcepcion e) {
@@ -72,7 +72,7 @@ public class ConsultarPoliticasCalidadServlet extends HttpServlet {
 					hasta, Integer.parseInt(estado));
 			// Guardar en el ambiente de request
 			request.setAttribute("PCALIDAD_REGISTRADAS", listaPCal);
-			RequestDispatcher rd = request.getRequestDispatcher("politicas-consulta.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("politica-calidad.jsp");
 			rd.forward(request, response);
 
 		} catch (DAOExcepcion e) {

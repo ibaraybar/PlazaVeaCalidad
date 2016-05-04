@@ -144,4 +144,35 @@ public class PoliticaCalidadDAO extends BaseDAO {
 		}
 		return pcal;
 	}
+	
+	public PoliticaCalidad buscarPorId(int idPolitica){
+		
+		PoliticaCalidad politicaCalidad = new PoliticaCalidad();
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try{
+			con = ConexionBD.obtenerConexion();
+			String query = "select * from t_politica_calidad where id_politica = ?;";
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, idPolitica);			
+			rs = stmt.executeQuery();
+			
+			if(rs.next()){
+				politicaCalidad.setIdPolitica(rs.getInt("id_politica"));
+				politicaCalidad.setAnio(rs.getInt("anio"));
+				politicaCalidad.setNombre(rs.getString("nombre"));
+				politicaCalidad.setDescripcion(rs.getString("descripcion"));
+			}
+			
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		} finally {
+			this.cerrarResultSet(rs);
+			this.cerrarStatement(stmt);
+			this.cerrarConexion(con);
+		}
+		
+		return politicaCalidad;
+	}
 }

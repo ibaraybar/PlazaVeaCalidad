@@ -19,7 +19,7 @@
 			Criterios de B&uacute;squeda
 		</div>
 
-		<form class="form-horizontal" role="form" method="post" action="ConsultarPoliticasCalidadServlet">
+		<form class="form-horizontal" role="form" method="post" action="PoliticaCalidadServlet">
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="lblpolitica" id="lblpolitica">Pol&iacute;tica de Calidad:</label>
 				<div class="col-md-10">
@@ -84,7 +84,7 @@
 								out.println("<td>" + x.getNombre() + "</td>");
 								out.println("<td align='center'>" + x.getAnio() + "</td>");
 								out.println("<td align='center'>" + x.getDescripcionActivo() + "</td>");
-								out.println("<td align='center'><a href='#' class='btn btn-warning'>Editar</a> <a href='#' class='btn btn-danger'>Eliminar</a> <a href='#' class='btn btn-info'>Detalle</a></td>");
+								out.println("<td align='center'><a href='#' class='btn btn-warning'>Editar</a> <a href='#' class='btn btn-danger'>Eliminar</a> <a href='DetallePoliticaCalidadServlet?idPolitica=" + x.getIdPolitica() + " ' class='btn btn-info'>Detalle</a></td>");
 								out.println("</tr>");
 							}
 						} 	
@@ -101,7 +101,7 @@
 						<h4 class="modal-title" id="myModalLabel">Crear Pol&iacute;tica Interna de Calidad</h4>
 					  </div>
 					  <div class="modal-body">
-					  	<form class="form-horizontal" role="form" method="post" action="ConsultarPoliticasCalidadServlet">
+					  	<form class="form-horizontal" role="form" method="post" action="PoliticaCalidadServlet">
 					  		<div class="form-group">
 					        	<label for="lbl01" class="col-sm-3 control-label" id=lbl01>C&oacute;digo Pol&iacute;tica:</label>
 					            <div class="col-sm-3">

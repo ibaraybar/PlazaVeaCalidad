@@ -2,8 +2,10 @@ package plazavea.calidad.negocio;
 
 import java.util.Collection;
 
+import plazavea.calidad.dao.DetallePoliticaCalidadDAO;
 import plazavea.calidad.dao.PoliticaCalidadDAO;
 import plazavea.calidad.excepcion.DAOExcepcion;
+import plazavea.calidad.modelo.DetallePoliticaCalidad;
 import plazavea.calidad.modelo.PoliticaCalidad;
 
 public class GestionPoliticasCalidad {
@@ -33,5 +35,17 @@ public class GestionPoliticasCalidad {
 		} catch (DAOExcepcion e) {
 			throw e;
 		}
+	}
+	
+	public PoliticaCalidad buscarPorId(int idPolitica) throws DAOExcepcion {
+		PoliticaCalidadDAO dao = new PoliticaCalidadDAO();
+
+		return dao.buscarPorId(idPolitica);
+	}
+	
+	public Collection<DetallePoliticaCalidad> listarPorIdPolitica(int idPolitica) throws DAOExcepcion {
+		DetallePoliticaCalidadDAO dao = new DetallePoliticaCalidadDAO();
+
+		return dao.listarPorIdPolitica(idPolitica);
 	}
 }
