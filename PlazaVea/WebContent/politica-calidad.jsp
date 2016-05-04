@@ -18,8 +18,8 @@
 			<h2>Pol&iacute;ticas Internas de Calidad</h2>
 			Criterios de B&uacute;squeda
 		</div>
-
-		<form class="form-horizontal" role="form" method="post" action="PoliticaCalidadServlet">
+		
+		<form class="form-horizontal" role="form" method="post" id="formBuscar" name="formBuscar" action="PoliticaCalidadServlet">
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="lblpolitica" id="lblpolitica">Pol&iacute;tica de Calidad:</label>
 				<div class="col-md-10">
@@ -47,9 +47,10 @@
 				</div>
 			</div>
 			
+			<input type="hidden" name="txtaccion" value=" "/>
 			<div class="form-group">
 				<div class="col-md-offset-8 col-md-1">
-					<input type="submit" value="Buscar" class="btn btn-primary" />
+					<input type="button" value="Buscar" class="btn btn-primary" onclick="buscar()" />
 				</div>
 				<div class="col-md-1">
 					<input type="button" value="Limpiar" class="btn btn-primary" onclick="limpiarCriteriosBusqueda()" />
@@ -101,7 +102,7 @@
 						<h4 class="modal-title" id="myModalLabel">Crear Pol&iacute;tica Interna de Calidad</h4>
 					  </div>
 					  <div class="modal-body">
-					  	<form class="form-horizontal" role="form" method="post" action="PoliticaCalidadServlet">
+					  	<form class="form-horizontal" role="form" method="post" id="formInsertar" name="formInsertar" action="PoliticaCalidadServlet">
 					  		<div class="form-group">
 					        	<label for="lbl01" class="col-sm-3 control-label" id=lbl01>C&oacute;digo Pol&iacute;tica:</label>
 					            <div class="col-sm-3">
@@ -126,12 +127,15 @@
 					            	<textarea class="form-control" id="txtdescpolitica" name="txtdescpolitica" rows=5></textarea>
 					            </div>
 					        </div>
+					        
+					        <input type="hidden" name="txtaccion" value=" "/>
+					        <div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+								<button type="button" class="btn btn-primary" onclick="insertar()">Aceptar</button>
+							</div>
 						</form>
 					  </div>
-					  <div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<button type="button" class="btn btn-primary">Aceptar</button>
-					  </div>
+					  
 					</div>
 				  </div>
 				</div>
@@ -146,6 +150,16 @@
 			$('input[name="txtanioHasta"] ').val('');
 			$('#selestado').val('0');
 		}
+		
+		function buscar() { 
+			$('input[name="txtaccion"] ').val('buscar');
+			$('form#formBuscar').submit();
+		}
+		
+		function insertar() { 
+			$('input[name="txtaccion"] ').val('insertar');
+			$('form#formInsertar').submit();
+		};
 	</script>
 		
     <div id="footer">
