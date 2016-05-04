@@ -52,10 +52,10 @@
 					<input type="submit" value="Buscar" class="btn btn-primary" />
 				</div>
 				<div class="col-md-1">
-					<input type="submit" value="Limpiar" class="btn btn-primary" />
+					<input type="button" value="Limpiar" class="btn btn-primary" onclick="limpiarCriteriosBusqueda()" />
 				</div>
 				<div class="col-md-2">
-					<input type="submit" value="Crear Política Calidad" class="btn btn-primary" />
+					<input type="button" value="Crear Política Calidad" class="btn btn-primary" data-toggle="modal" data-target="#modal-crear-politica" />
 				</div>
 			</div>
 		</form>
@@ -92,9 +92,61 @@
 					
 				</table>
 				</div>
+				
+				<div class="modal fade" id="modal-crear-politica" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-md">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Crear Pol&iacute;tica Interna de Calidad</h4>
+					  </div>
+					  <div class="modal-body">
+					  	<form class="form-horizontal" role="form" method="post" action="ConsultarPoliticasCalidadServlet">
+					  		<div class="form-group">
+					        	<label for="lbl01" class="col-sm-3 control-label" id=lbl01>C&oacute;digo Pol&iacute;tica:</label>
+					            <div class="col-sm-3">
+					            	<input type="text" class="form-control" id="txtcodpolitica" name="txtcodpolitica" disabled>
+					            </div>
+					        </div>
+					        <div class="form-group">
+					        	<label for="lbl04" class="col-sm-3 control-label" id=lbl04>Año Pol&iacute;tica:</label>
+					            <div class="col-sm-3">
+					            	<input type="text" class="form-control" id="txtaniopolitica" name="txtaniopolitica" required autofocus>
+					            </div>
+					        </div>
+					        <div class="form-group">
+					            <label for="lbl02" class="col-sm-3 control-label" id=lbl02>Nombre Pol&iacute;tica:</label>
+					            <div class="col-sm-9">
+					            	<input type="text" class="form-control" id="txtnompolitica" name="txtnompolitica">
+					            </div>
+					        </div>
+					        <div class="form-group">
+					            <label for="lbl03" class="col-sm-3 control-label" id=lbl03>Descripci&oacute;n Pol&iacute;tica:</label>
+					            <div class="col-sm-9">
+					            	<textarea class="form-control" id="txtdescpolitica" name="txtdescpolitica" rows=5></textarea>
+					            </div>
+					        </div>
+						</form>
+					  </div>
+					  <div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary">Aceptar</button>
+					  </div>
+					</div>
+				  </div>
+				</div>
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		function limpiarCriteriosBusqueda() {
+			$('input[name="txtpolitica"] ').val('');
+			$('input[name="txtanioDesde"] ').val('');
+			$('input[name="txtanioHasta"] ').val('');
+			$('#selestado').val('0');
+		}
+	</script>
 		
     <div id="footer">
         Todos los Derechos Reservados 2016

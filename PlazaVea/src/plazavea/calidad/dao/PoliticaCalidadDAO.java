@@ -14,6 +14,51 @@ import plazavea.calidad.util.ConexionBD;
 
 public class PoliticaCalidadDAO extends BaseDAO {
 
+	public PoliticaCalidad insertar(PoliticaCalidad vo) throws DAOExcepcion {
+		String query = "INSERT INTO t_politica_calidad (anio, nombre, descripcion, estado) VALUES (?,?,?,?);";
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConexionBD.obtenerConexion();
+			con.setAutoCommit(false);
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, vo.getAnio());
+			stmt.setString(2, vo.getNombre());
+			stmt.setString(3, vo.getDescripcion());
+			stmt.setBoolean(4, vo.isActivo());
+			
+			int i = stmt.executeUpdate();
+			if (i != 1) {
+				throw new SQLException("No se pudo insertar");
+			}
+			
+			con.commit();
+		}
+		catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				throw new DAOExcepcion(e.getMessage());
+			}
+			System.err.println(e.getMessage());
+			throw new DAOExcepcion(e.getMessage());
+		}
+		finally {
+			try {
+				con.setAutoCommit(true);
+			} catch (SQLException e) {
+				throw new DAOExcepcion(e.getMessage());
+			}
+			this.cerrarResultSet(rs);
+			this.cerrarStatement(stmt);
+			this.cerrarConexion(con);
+		}
+		
+		return vo;
+	}
+	
 	public Collection<PoliticaCalidad> listar() throws DAOExcepcion {
 		Collection<PoliticaCalidad> pcal = new ArrayList<PoliticaCalidad>();
 		Connection con = null;

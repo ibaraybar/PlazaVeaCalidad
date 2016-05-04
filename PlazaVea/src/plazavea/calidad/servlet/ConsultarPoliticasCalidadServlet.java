@@ -1,6 +1,7 @@
 package plazavea.calidad.servlet;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
@@ -60,7 +61,10 @@ public class ConsultarPoliticasCalidadServlet extends HttpServlet {
 		String estado = request.getParameter("selestado");
 		int desde = Integer.parseInt("0" + anioDesde);
 		int hasta = Integer.parseInt("0" + anioHasta);
-		if (hasta == 0) { hasta=2016; }
+		
+		Calendar fechaActual = Calendar.getInstance();
+		int anioActual = fechaActual.get(Calendar.YEAR);
+		if (hasta == 0) { hasta=anioActual; }
 		
 		GestionPoliticasCalidad negocioPCal = new GestionPoliticasCalidad();
 		try {

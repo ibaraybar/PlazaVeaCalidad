@@ -19,4 +19,19 @@ public class GestionPoliticasCalidad {
 
 		return dao.buscar(politicaCalidad, anioDesde, anioHasta, estado);
 	}
+	
+	public void registrarPoliticaCalidad(int anio, String nombre, String descripcion) throws DAOExcepcion {
+		PoliticaCalidad pc = new PoliticaCalidad();
+		pc.setAnio(anio);
+		pc.setNombre(nombre);
+		pc.setDescripcion(descripcion);
+		pc.setActivo(true);
+		
+		PoliticaCalidadDAO dao = new PoliticaCalidadDAO();
+		try {
+			dao.insertar(pc);
+		} catch (DAOExcepcion e) {
+			throw e;
+		}
+	}
 }
