@@ -54,4 +54,10 @@ public class GestionPoliticasCalidad {
 
 		dao.eliminar(idPolitica);
 	}
+	
+	public void actualizar(int idPolitica, int anio, String nombre, String descripcion) throws DAOExcepcion {
+		PoliticaCalidadDAO dao = new PoliticaCalidadDAO();
+
+		dao.actualizar(idPolitica, anio, nombre, descripcion);
+	}
 }

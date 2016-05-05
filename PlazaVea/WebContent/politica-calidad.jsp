@@ -97,7 +97,7 @@
 								out.println("<td>" + x.getNombre() + "</td>");
 								out.println("<td align='center'>" + x.getAnio() + "</td>");
 								out.println("<td align='center'>" + x.getDescripcionActivo() + "</td>");
-								out.println("<td align='center'><a href='#' class='btn btn-warning' data-toggle='modal' data-target='#modal-editar-politica' onclick='mostrarPoliticaEditar(" + x.getIdPolitica() + ")'>Editar</a> <a href='#' class='btn btn-danger' data-toggle='modal' data-target='#modal-confirm-delete' onclick='mostrarIdEliminar(" + x.getIdPolitica() + ")'>Eliminar</a> <a href='DetallePoliticaCalidadServlet?idPolitica=" + x.getIdPolitica() + " ' class='btn btn-info'>Detalle</a></td>");
+								out.println("<td align='center'><a href='#' class='btn btn-warning' data-toggle='modal' data-target='#modal-editar-politica' onclick='mostrarPoliticaEditar(" + x.getIdPolitica() + ",\"" + x.getAnio() + "\",\"" + x.getNombre() + "\",\"" + x.getDescripcion() + "\")'>Editar</a> <a href='#' class='btn btn-danger' data-toggle='modal' data-target='#modal-confirm-delete' onclick='mostrarIdEliminar(" + x.getIdPolitica() + ")'>Eliminar</a> <a href='DetallePoliticaCalidadServlet?idPolitica=" + x.getIdPolitica() + " ' class='btn btn-info'>Detalle</a></td>");
 								out.println("</tr>");
 							}
 						} 	
@@ -189,6 +189,7 @@
 					            <div class="col-sm-3">
 					            	<input type="text" class="form-control" id="txtcodpolitica2" name="txtcodpolitica2" disabled>
 					            </div>
+					            <input type="hidden" name="txtIdPolCal" value=" "/>
 					        </div>
 					        <div class="form-group">
 					        	<label for="lbl06" class="col-sm-3 control-label" id="lbl06">Año Pol&iacute;tica:</label>
@@ -270,9 +271,18 @@
 			$('input[name="txtHiddenIdPC"] ').val(idPCal);
 		}
 		
-		function mostrarPoliticaEditar(pIdPC) {
-			$('input[name="txtcodpolitica2"] ').val(idPCal);
+		function mostrarPoliticaEditar(pIdPC, pAnioPC, pNomPC, pDesPC) {
+			$('input[name="txtcodpolitica2"] ').val(pIdPC);
+			$('input[name="txtIdPolCal"] ').val(pIdPC);
+			$('input[name="txtaniopolitica2"] ').val(pAnioPC);
+			$('input[name="txtnompolitica2"] ').val(pNomPC);
+			$('textarea[name="txtdescpolitica2"] ').val(pDesPC);
 		}
+		
+		function editar() { 
+			$('input[name="txtaccion"] ').val('editar');
+			$('form#formEditar').submit();
+		};
 	</script>
 		
     <div id="footer">

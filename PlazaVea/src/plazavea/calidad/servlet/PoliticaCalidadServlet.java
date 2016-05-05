@@ -25,6 +25,7 @@ public class PoliticaCalidadServlet extends HttpServlet {
 	String buscarOK = "NO";
 	String insertarOK = "NO";
 	String eliminarOK = "NO";
+	String editarOK = "NO";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -119,6 +120,28 @@ public class PoliticaCalidadServlet extends HttpServlet {
 			} catch (DAOExcepcion e) {
 				eliminarOK="NO";
 				sesion.setAttribute("ELIMINAR_OK",eliminarOK);
+				RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
+				rd.forward(request, response);
+			}
+		}
+		else if (accion.equalsIgnoreCase("editar")) {
+			String idPCedit = request.getParameter("txtIdPolCal");
+			String anioPCEdit = request.getParameter("txtaniopolitica2");
+			String nomPCEdit = request.getParameter("txtnompolitica2");
+			String descPCEdit = request.getParameter("txtdescpolitica2");
+			System.out.println(idPCedit);
+			int idPoliticaEditar = Integer.parseInt(idPCedit);
+			int anioPCEditar = Integer.parseInt(anioPCEdit);
+					
+			GestionPoliticasCalidad negocioPC = new GestionPoliticasCalidad();
+			try {
+				negocioPC.actualizar(idPoliticaEditar, anioPCEditar, nomPCEdit, descPCEdit);
+				editarOK="SI";
+				sesion.setAttribute("EDITAR_OK",editarOK);
+				response.sendRedirect(request.getContextPath()	+ "/PoliticaCalidadServlet");
+			} catch (DAOExcepcion e) {
+				editarOK="NO";
+				sesion.setAttribute("EDITAR_OK",editarOK);
 				RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
 				rd.forward(request, response);
 			}

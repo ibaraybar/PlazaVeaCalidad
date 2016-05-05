@@ -198,4 +198,30 @@ public class PoliticaCalidadDAO extends BaseDAO {
 			this.cerrarConexion(con);
 		}
 	}
+	
+	public void actualizar(int idPolitica, int anioPolitica, String nombrePolitica, String descPolitica) throws DAOExcepcion {
+		//System.out.println("PersonaDAO: eliminar(String personaNombre)");
+		String query = "UPDATE t_politica_calidad SET anio=?, nombre=?, descripcion=? WHERE id_politica=?;";
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = ConexionBD.obtenerConexion();
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, anioPolitica);
+			stmt.setString(2, nombrePolitica);
+			stmt.setString(3, descPolitica);
+			stmt.setInt(4, idPolitica);
+			int i = stmt.executeUpdate();
+			if (i != 1) {
+
+				throw new SQLException("No se pudo eliminar");
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOExcepcion(e.getMessage());
+		} finally {
+			this.cerrarStatement(stmt);
+			this.cerrarConexion(con);
+		}
+	}
 }
