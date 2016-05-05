@@ -1,10 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="es-419">
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Pagina de Consulta de Politicas Internas de Calidad del Modulo de Calidad">
 	<meta name="author" content="Ivan Baraybar Delgado">
 	
+	<title>SISTEMA DE GESTIÓN DE SUPERMERCADOS - Gestión de Calidad</title>
+	    
 	<%@include file="include/header.jsp" %> 	
 </head>
 
@@ -14,20 +18,28 @@
 	<div class="container">
         	
 		<!-- Inicio del contenido -->
+		
+
+		<ol class="breadcrumb">
+			<li><a href="#">Inicio</a></li>
+			<li><a href="#">Administración</a></li>
+			<li class="active">Políticas Internas de Calidad</li>
+		</ol>
+
 		<div class="page-header">
 			<h2>Pol&iacute;ticas Internas de Calidad</h2>
-			Criterios de B&uacute;squeda
 		</div>
 		
-		<form class="form-horizontal" role="form" method="post" id="formBuscar" name="formBuscar" action="PoliticaCalidadServlet">
-			<div class="form-group">
+		<form role="form" method="post" id="formBuscar" name="formBuscar" action="PoliticaCalidadServlet" >
+			
+			<div class="row form-group">
 				<label class="col-md-2 control-label" for="lblpolitica" id="lblpolitica">Pol&iacute;tica de Calidad:</label>
 				<div class="col-md-10">
 					<input class="form-control" type="text" name="txtpolitica" id="txtpolitica" />
 				</div>
 			</div>
 			
-			<div class="form-group">
+			<div class="row form-group">
 				<label for="lblanio" class="col-md-1 control-label">Año:</label>
 				<label for="lbldesde" class="col-md-1 control-label">Desde:</label>
 				<div class="col-md-2">
@@ -48,7 +60,7 @@
 			</div>
 			
 			<input type="hidden" name="txtaccion" value=" "/>
-			<div class="form-group">
+			<div class="row form-group">
 				<div class="col-md-offset-8 col-md-1">
 					<input type="button" value="Buscar" class="btn btn-primary" onclick="buscar()" />
 				</div>
@@ -85,7 +97,7 @@
 								out.println("<td>" + x.getNombre() + "</td>");
 								out.println("<td align='center'>" + x.getAnio() + "</td>");
 								out.println("<td align='center'>" + x.getDescripcionActivo() + "</td>");
-								out.println("<td align='center'><a href='#' class='btn btn-warning'>Editar</a> <a href='#' class='btn btn-danger' data-toggle='modal' data-target='#modal-confirm-delete'>Eliminar</a> <a href='DetallePoliticaCalidadServlet?idPolitica=" + x.getIdPolitica() + " ' class='btn btn-info'>Detalle</a></td>");
+								out.println("<td align='center'><a href='#' class='btn btn-warning' data-toggle='modal' data-target='#modal-editar-politica' onclick='mostrarPoliticaEditar(" + x.getIdPolitica() + ")'>Editar</a> <a href='#' class='btn btn-danger' data-toggle='modal' data-target='#modal-confirm-delete' onclick='mostrarIdEliminar(" + x.getIdPolitica() + ")'>Eliminar</a> <a href='DetallePoliticaCalidadServlet?idPolitica=" + x.getIdPolitica() + " ' class='btn btn-info'>Detalle</a></td>");
 								out.println("</tr>");
 							}
 						} 	
@@ -149,19 +161,87 @@
 					  </div>
 					  <div class="modal-body">
 					  	<form class="form-horizontal" role="form" method="post" id="formEliminar" name="formEliminar" action="PoliticaCalidadServlet">
-					  		¿ Est&aacute; seguro de Eliminar la Pol&iacute;tica de Calidad seleccionada ?
+					  		<p>¿ Est&aacute; seguro de Eliminar la Pol&iacute;tica de Calidad seleccionada ?</p>
+					  		<input type="hidden" name="txtHiddenIdPC" value=" "/>
+					  		<input type="hidden" name="txtaccion" value=" "/>
+					  		
+					  		<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+								<button type="button" class="btn btn-primary" onclick="eliminar()">S&iacute;</button>
+							</div>
 					  	</form>				
 					  </div>
-					  <div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-							<button type="button" class="btn btn-primary" onclick="insertar()">S&iacute;</button>
+					</div>
+				  </div>
+				</div>
+				
+				<div class="modal fade" id="modal-editar-politica" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-md">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Editar Pol&iacute;tica Interna de Calidad</h4>
 					  </div>
+					  <div class="modal-body">
+					  	<form class="form-horizontal" role="form" method="post" id="formEditar" name="formEditar" action="PoliticaCalidadServlet">
+					  		<div class="form-group">
+					        	<label for="lbl05" class="col-sm-3 control-label" id="lbl05">C&oacute;digo Pol&iacute;tica:</label>
+					            <div class="col-sm-3">
+					            	<input type="text" class="form-control" id="txtcodpolitica2" name="txtcodpolitica2" disabled>
+					            </div>
+					        </div>
+					        <div class="form-group">
+					        	<label for="lbl06" class="col-sm-3 control-label" id="lbl06">Año Pol&iacute;tica:</label>
+					            <div class="col-sm-3">
+					            	<input type="text" class="form-control" id="txtaniopolitica2" name="txtaniopolitica2" required>
+					            </div>
+					        </div>
+					        <div class="form-group">
+					            <label for="lbl07" class="col-sm-3 control-label" id="lbl07">Nombre Pol&iacute;tica:</label>
+					            <div class="col-sm-9">
+					            	<input type="text" class="form-control" id="txtnompolitica2" name="txtnompolitica2">
+					            </div>
+					        </div>
+					        <div class="form-group">
+					            <label for="lbl08" class="col-sm-3 control-label" id="lbl08">Descripci&oacute;n Pol&iacute;tica:</label>
+					            <div class="col-sm-9">
+					            	<textarea class="form-control" id="txtdescpolitica2" name="txtdescpolitica2" rows=5></textarea>
+					            </div>
+					        </div>
+					        
+					        <input type="hidden" name="txtaccion" value=" "/>
+					        <div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+								<button type="button" class="btn btn-primary" onclick="editar()">Aceptar</button>
+							</div>
+						</form>
+					  </div>
+					  
 					</div>
 				  </div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<%
+	//String juntaOK = String.valueOf(request.getAttribute("JUNTA_OK"));
+	HttpSession sesion = request.getSession();
+	String eliminarOK = (String)sesion.getAttribute("ELIMINAR_OK");
+				
+	if (eliminarOK == "SI") {
+	%>
+	<div class="alert alert-success alert-dismissible fade in" role="alert" id="lyMensajeOk">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	  <strong>Felicitaciones! </strong>La Politica de Calidad has sido eliminada.
+	</div>
+	
+	<script>
+		$("#lyMensajeOk").delay(1000).fadeTo(1000, 0);
+	</script>
+	<%
+	}
+	%>
 	
 	<script type="text/javascript">
 		function limpiarCriteriosBusqueda() {
@@ -183,8 +263,16 @@
 		
 		function eliminar() { 
 			$('input[name="txtaccion"] ').val('eliminar');
-			$('form#formInsertar').submit();
+			$('form#formEliminar').submit();
 		};
+		
+		function mostrarIdEliminar(idPCal) {
+			$('input[name="txtHiddenIdPC"] ').val(idPCal);
+		}
+		
+		function mostrarPoliticaEditar(pIdPC) {
+			$('input[name="txtcodpolitica2"] ').val(idPCal);
+		}
 	</script>
 		
     <div id="footer">

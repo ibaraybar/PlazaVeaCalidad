@@ -16,14 +16,14 @@
             <div id="navbar" class="navbar-collapse collapse">
                 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Registro</a></li>
-					<li><a href="#">Ingreso al sistema</a></li>
+					<li><a href="#">Perfil</a></li>
+					<li><a href="#">Salir</a></li>
 				</ul>
 
                 <ul class="nav navbar-nav">
                     <li><a href="index.jsp">Inicio</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mantenimiento <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administraci&oacute;n <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="PoliticaCalidadServlet">Políticas Internas de Calidad</a></li>
                             <li><a href="#">Mantenimiento de Tarjetas</a></li>

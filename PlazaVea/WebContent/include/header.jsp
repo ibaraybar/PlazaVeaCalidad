@@ -1,8 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
-    <title>SISTEMA DE GESTIÓN DE SUPERMERCADOS - Gestión de Mantenimiento de Equipo de Local</title>
-
     <script type="text/javascript" src="js/modernizr-2.6.2.js"></script>
 	<script type="text/javascript" src="js/moment-with-locales.js"></script>
 	

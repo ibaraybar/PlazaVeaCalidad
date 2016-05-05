@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import plazavea.calidad.excepcion.DAOExcepcion;
 import plazavea.calidad.modelo.PoliticaCalidad;
@@ -21,6 +22,9 @@ import plazavea.calidad.negocio.GestionPoliticasCalidad;
 @WebServlet("/PoliticaCalidadServlet")
 public class PoliticaCalidadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	String buscarOK = "NO";
+	String insertarOK = "NO";
+	String eliminarOK = "NO";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -55,6 +59,8 @@ public class PoliticaCalidadServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession sesion = request.getSession();
+		
 		String accion = request.getParameter("txtaccion");
 		System.out.println(accion);
 		
@@ -96,6 +102,23 @@ public class PoliticaCalidadServlet extends HttpServlet {
 				negocioPC.registrarPoliticaCalidad(anioPC, nomPolitica, descPolitica);
 				response.sendRedirect(request.getContextPath()	+ "/PoliticaCalidadServlet");
 			} catch (DAOExcepcion e) {
+				RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
+				rd.forward(request, response);
+			}
+		}
+		else if (accion.equalsIgnoreCase("eliminar")) {
+			String idPC = request.getParameter("txtHiddenIdPC");
+			int idPolitica = Integer.parseInt(idPC);
+					
+			GestionPoliticasCalidad negocioPC = new GestionPoliticasCalidad();
+			try {
+				negocioPC.eliminar(idPolitica);
+				eliminarOK="SI";
+				sesion.setAttribute("ELIMINAR_OK",eliminarOK);
+				response.sendRedirect(request.getContextPath()	+ "/PoliticaCalidadServlet");
+			} catch (DAOExcepcion e) {
+				eliminarOK="NO";
+				sesion.setAttribute("ELIMINAR_OK",eliminarOK);
 				RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
 				rd.forward(request, response);
 			}

@@ -48,4 +48,10 @@ public class GestionPoliticasCalidad {
 
 		return dao.listarPorIdPolitica(idPolitica);
 	}
+	
+	public void eliminar(int idPolitica) throws DAOExcepcion {
+		PoliticaCalidadDAO dao = new PoliticaCalidadDAO();
+
+		dao.eliminar(idPolitica);
+	}
 }
