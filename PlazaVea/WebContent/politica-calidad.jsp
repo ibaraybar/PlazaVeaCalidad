@@ -85,7 +85,7 @@
 								out.println("<td>" + x.getNombre() + "</td>");
 								out.println("<td align='center'>" + x.getAnio() + "</td>");
 								out.println("<td align='center'>" + x.getDescripcionActivo() + "</td>");
-								out.println("<td align='center'><a href='#' class='btn btn-warning'>Editar</a> <a href='#' class='btn btn-danger'>Eliminar</a> <a href='DetallePoliticaCalidadServlet?idPolitica=" + x.getIdPolitica() + " ' class='btn btn-info'>Detalle</a></td>");
+								out.println("<td align='center'><a href='#' class='btn btn-warning'>Editar</a> <a href='#' class='btn btn-danger' data-toggle='modal' data-target='#modal-confirm-delete'>Eliminar</a> <a href='DetallePoliticaCalidadServlet?idPolitica=" + x.getIdPolitica() + " ' class='btn btn-info'>Detalle</a></td>");
 								out.println("</tr>");
 							}
 						} 	
@@ -139,6 +139,26 @@
 					</div>
 				  </div>
 				</div>
+				
+				<div class="modal fade" id="modal-confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-md">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Eliminar Pol&iacute;tica Interna de Calidad</h4>
+					  </div>
+					  <div class="modal-body">
+					  	<form class="form-horizontal" role="form" method="post" id="formEliminar" name="formEliminar" action="PoliticaCalidadServlet">
+					  		¿ Est&aacute; seguro de Eliminar la Pol&iacute;tica de Calidad seleccionada ?
+					  	</form>				
+					  </div>
+					  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+							<button type="button" class="btn btn-primary" onclick="insertar()">S&iacute;</button>
+					  </div>
+					</div>
+				  </div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -158,6 +178,11 @@
 		
 		function insertar() { 
 			$('input[name="txtaccion"] ').val('insertar');
+			$('form#formInsertar').submit();
+		};
+		
+		function eliminar() { 
+			$('input[name="txtaccion"] ').val('eliminar');
 			$('form#formInsertar').submit();
 		};
 	</script>
