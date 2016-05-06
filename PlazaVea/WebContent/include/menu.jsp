@@ -23,30 +23,31 @@
                 <ul class="nav navbar-nav">
                     <li><a href="index.jsp">Inicio</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administraci&oacute;n <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Planificaci&oacute;n Anual <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="PoliticaCalidadServlet">Políticas Internas de Calidad</a></li>
-                            <li><a href="#">Mantenimiento de Tarjetas</a></li>
-                            <li><a href="#">Mantenido</a></li>
+                            <li><a href="#">Condiciones de Calidad de Entrega de Productos</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Reporte de algo</a></li>
+                            <li><a href="#">Elaborar Plan Anual</a></li>
+                            <li><a href="#">Generar Plantilla de Informe de Gestión</a></li>
+                            <li><a href="#">Generar Plantilla de Hoja de Trabajo</a></li>
+                            <li><a href="#">Aprobar Documentos de Gestión</a></li>
                         </ul>
                     </li>
 					<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Planificación Diaria <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Mantenimiento de Clientes</a></li>
-                            <li><a href="#">Mantenimiento de Tarjetas</a></li>
-                            <li><a href="#">Mantenido</a></li>
+                            <li><a href="#">Tiendas</a></li>
+                            <li><a href="#">Productos</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Reporte de algo</a></li>
+                            <li><a href="#">Actualizar Plan de Trabajo Diario</a></li>
                         </ul>
                     </li>
 					<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ejecución Plan de Trabajo <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Reporte de Clientes</a></li>
-                            <li><a href="#">Reporte de Tarjetas</a></li>
+                            <li><a href="#">Realizar Inspección</a></li>
+                            <li><a href="#">Actualizar Informe de Estado de Inspección</a></li>
                             <li><a href="#">Reporte</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">Reporte de algo</a></li>

@@ -46,21 +46,21 @@ public class DetallePoliticaCalidad {
 	public void setAlerta(boolean alerta) {
 		this.alerta = alerta;
 	}
-//	public String getDescripcionTipo() {
-//		if (this.tipo.equals("C")) { 
-//			return "Crítico";
-//		}
-//		else {
-//			return "Normal";
-//		}
-//	}
-//	public String getDescripcionAlerta() {
-//		if (this.alerta == true) { 
-//			return "Si";
-//		}
-//		else {
-//			return "No";
-//		}
-//	}
+	public String getDescripcionTipo() {
+		if (this.tipo.equals("C")) { 
+			return "Crítico";
+		}
+		else {
+			return "Normal";
+		}
+	}
+	public String getDescripcionAlerta() {
+		if (this.alerta == true) { 
+			return "Si";
+		}
+		else {
+			return "No";
+		}
+	}
 		
 }

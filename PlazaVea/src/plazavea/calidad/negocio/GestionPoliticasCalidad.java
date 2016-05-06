@@ -60,4 +60,43 @@ public class GestionPoliticasCalidad {
 
 		dao.actualizar(idPolitica, anio, nombre, descripcion);
 	}
+	
+	public void actualizarDetallePoliticaCalidad(int idDetallePolitica, int idPolitica, String nombre, String descripcion, String tipo, boolean alerta) throws DAOExcepcion {
+		DetallePoliticaCalidad dpc = new DetallePoliticaCalidad();
+		dpc.setIdDetallePolitica(idDetallePolitica);
+		dpc.setIdPolitica(idPolitica);
+		dpc.setNombre(nombre);
+		dpc.setDescripcion(descripcion);
+		dpc.setTipo(tipo);
+		dpc.setAlerta(alerta);
+		
+		DetallePoliticaCalidadDAO dao = new DetallePoliticaCalidadDAO();
+		try {
+			dao.actualizar(dpc);
+		} catch (DAOExcepcion e) {
+			throw e;
+		}
+	}
+	
+	public void eliminarDetallePoliticaCalidad(int idDetallePolitica) throws DAOExcepcion {
+		DetallePoliticaCalidadDAO dao = new DetallePoliticaCalidadDAO();
+		
+		dao.eliminar(idDetallePolitica);
+	}
+	
+	public void registrarDetallePoliticaCalidad(int idPolitica, String nombre, String descripcion, String tipo, boolean alerta) throws DAOExcepcion {
+		DetallePoliticaCalidad dpc = new DetallePoliticaCalidad();
+		dpc.setIdPolitica(idPolitica);
+		dpc.setNombre(nombre);
+		dpc.setDescripcion(descripcion);
+		dpc.setTipo(tipo);
+		dpc.setAlerta(alerta);
+		
+		DetallePoliticaCalidadDAO dao = new DetallePoliticaCalidadDAO();
+		try {
+			dao.insertar(dpc);
+		} catch (DAOExcepcion e) {
+			throw e;
+		}
+	}
 }
