@@ -1,5 +1,5 @@
-﻿body {
-    padding-top: 50px;
+body {
+    padding-top: 60px;
     padding-bottom: 60px;
 }
 
@@ -20,10 +20,14 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
 }
 
 /* erickpm */
+
+.page-header {
+    margin-top: 0px;
+}
 
 .navbar{
 	background: #FF142D;
@@ -80,6 +84,11 @@ textarea {
 
 .nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus{
 	background-color: lightgray;
+}
+
+.form-control-label {
+    padding: .375rem .75rem;
+    margin-bottom: 0;
 }
 
 #content{

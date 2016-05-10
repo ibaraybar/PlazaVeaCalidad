@@ -15,11 +15,9 @@
 <body>
 	<%@include file="include/menu.jsp" %>
 
-	<div class="container">
+	<div class="container-fluid">
         	
 		<!-- Inicio del contenido -->
-		
-
 		<ol class="breadcrumb">
 			<li><a href="#">Inicio</a></li>
 			<li><a href="#">Administración</a></li>
@@ -33,24 +31,24 @@
 		<form role="form" method="post" id="formBuscar" name="formBuscar" action="PoliticaCalidadServlet" >
 			
 			<div class="row form-group">
-				<label class="col-md-2 control-label" for="lblpolitica" id="lblpolitica">Pol&iacute;tica de Calidad:</label>
-				<div class="col-md-10">
+				<label class="col-sm-2 control-label" for="lblpolitica" id="lblpolitica">Pol&iacute;tica de Calidad:</label>
+				<div class="col-sm-10">
 					<input class="form-control" type="text" name="txtpolitica" id="txtpolitica" />
 				</div>
 			</div>
 			
 			<div class="row form-group">
-				<label for="lblanio" class="col-md-1 control-label">Año:</label>
-				<label for="lbldesde" class="col-md-1 control-label">Desde:</label>
-				<div class="col-md-2">
+				<label for="lblanio" class="col-sm-1 control-label">Año:</label>
+				<label for="lbldesde" class="col-sm-1 control-label">Desde:</label>
+				<div class="col-sm-2">
 					<input type="text" name="txtanioDesde" id="txtanioDesde" class="form-control" />
 				</div>
-				<label for="lblhasta" class="col-md-1 control-label">Hasta:</label>
-				<div class="col-md-2">
+				<label for="lblhasta" class="col-sm-1 control-label">Hasta:</label>
+				<div class="col-sm-2">
 					<input type="text" name="txtanioHasta" id="txtanioHasta" class="form-control" />
 				</div>
-				<label for="lblestado" class="col-md-1 control-label">Estado:</label>
-				<div class="col-md-3">
+				<label for="lblestado" class="col-sm-1 control-label">Estado:</label>
+				<div class="col-sm-4">
 					<select name="selestado" id="selestado" class="form-control">
 					  <option value="0">Todos</option>
 					  <option value="1">Activo</option>
