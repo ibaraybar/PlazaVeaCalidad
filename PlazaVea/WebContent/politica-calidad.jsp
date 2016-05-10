@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="es-419">
 <head>
@@ -15,13 +16,13 @@
 <body>
 	<%@include file="include/menu.jsp" %>
 
-	<div class="container-fluid">
+	<div class="container">
         	
 		<!-- Inicio del contenido -->
 		<ol class="breadcrumb">
 			<li><a href="#">Inicio</a></li>
-			<li><a href="#">Administración</a></li>
-			<li class="active">Políticas Internas de Calidad</li>
+			<li><a href="#">Planificaci&oacute;n Anual</a></li>
+			<li class="active">Pol&iacute;ticas Internas de Calidad</li>
 		</ol>
 
 		<div class="page-header">
