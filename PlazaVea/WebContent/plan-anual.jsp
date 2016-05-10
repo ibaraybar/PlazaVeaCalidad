@@ -37,19 +37,27 @@
 				</div>
 			</div>
 			<div class="row form-group">
-				<label class="col-sm-2 control-label" for="lbldesc" id="lbldesc">Descripci&acute;n Plan:</label>
+				<label class="col-sm-2 control-label" for="lbldesc" id="lbldesc">Descripci&oacute;n Plan:</label>
 				<div class="col-sm-10">
-					<textarea class="form-control" id="txtdescrip" name="txtdescrip" rows=3></textarea>
+					<textarea class="form-control" id="txtdescrip" name="txtdescrip" rows=2></textarea>
 				</div>
 			</div>
-			
+			<br>
 			<input type="hidden" name="txtaccion" value=" "/>
-			<div class="row form-group">
-				<label class="col-sm-3 control-label" for="lbltitulo1" id="lbltitulo1">Pol&iacute;ticas Internas de Calidad:</label>
-				<div class="col-sm-offset-6 col-sm-3">
-					<input type="button" value="Asignar Políticas de Calidad" class="btn btn-primary" data-toggle="modal" data-target="#modal-crear-politica" />
-				</div>
+			
+			<!-- Inicio del Panel de Politicas de Calidad -->			
+			<div class="panel-group">
+			<div class="panel panel-info">
+			<div class="panel-heading clearfix">
+				<button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#modal-crear-politica">
+					<span class="glyphicon glyphicon-check" aria-hidden="true"></span> Asignar Pol&iacute;ticas de Calidad
+				</button>
+				<h3 class="panel-title" style="padding-top: 7.5px;">
+			    	<a data-toggle="collapse" href="#collapse1">Pol&iacute;ticas Internas de Calidad</a>
+			    </h3>
 			</div>
+			<div id="collapse1" class="panel-collapse collapse">
+			<div class="panel-body">
 			
 			<div class="row">
 		   		<div class="col-md-12">
@@ -59,7 +67,7 @@
 							<th>C&oacute;digo</th>
 							<th>Pol&iacute;tica de Calidad</th>
 							<th>Año</th>
-							<th>Descripci&oacute;</th>
+							<th>Descripci&oacute;n</th>
 							<th>Acciones</th>
 						</tr>
 					</table>
@@ -67,12 +75,23 @@
 				</div>
 			</div>
 			
-			<div class="row form-group">
-				<label class="col-sm-3 control-label" for="lbltitulo2" id="lbltitulo2">Lista de Inspecciones a realizar:</label>
-				<div class="col-sm-offset-6 col-sm-3">
-					<input type="button" value="Agregar Inspección" class="btn btn-primary" data-toggle="modal" data-target="#modal-crear-politica" />
-				</div>
+			</div></div></div></div>
+			<!-- Fin del Panel de Politicas de Calidad -->
+			
+			<br>
+			<!-- Inicio del Panel de Inspecciones -->			
+			<div class="panel-group">
+			<div class="panel panel-info">
+			<div class="panel-heading clearfix">
+				<button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#modal-crear-politica">
+					<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Agregar Inspecci&oacute;n
+				</button>
+				<h3 class="panel-title" style="padding-top: 7.5px;">
+			    	<a data-toggle="collapse" href="#collapse2">Inspecciones a realizar</a>
+			    </h3>
 			</div>
+			<div id="collapse2" class="panel-collapse collapse in">
+			<div class="panel-body">
 			
 			<div class="row">
 		   		<div class="col-md-12">
@@ -91,15 +110,14 @@
 				</div>
 			</div>
 			
+			</div></div></div></div>
+			<!-- Fin del Panel de Inspecciones -->
+			
 			<div class="row form-group">
-				<div class="col-md-offset-8 col-md-1">
-					<input type="button" value="Buscar" class="btn btn-primary" onclick="buscar()" />
-				</div>
-				<div class="col-md-1">
-					<input type="button" value="Limpiar" class="btn btn-primary" onclick="limpiarCriteriosBusqueda()" />
-				</div>
-				<div class="col-md-2">
-					<input type="button" value="Crear Política Calidad" class="btn btn-primary" data-toggle="modal" data-target="#modal-crear-politica" />
+				<div class="col-md-offset-10 col-md-2">
+					<button type="button" class="btn btn-primary btn-block" onclick="buscar()">
+						<span class="glyphicon glyphicon-save" aria-hidden="true"></span> Grabar
+					</button>
 				</div>
 			</div>
 		</form>
