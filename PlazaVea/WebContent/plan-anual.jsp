@@ -42,7 +42,7 @@
 					<textarea class="form-control" id="txtdescrip" name="txtdescrip" rows=2></textarea>
 				</div>
 			</div>
-			<br>
+			
 			<input type="hidden" name="txtaccion" value=" "/>
 			
 			<!-- Inicio del Panel de Politicas de Calidad -->			
@@ -78,7 +78,6 @@
 			</div></div></div></div>
 			<!-- Fin del Panel de Politicas de Calidad -->
 			
-			<br>
 			<!-- Inicio del Panel de Inspecciones -->			
 			<div class="panel-group">
 			<div class="panel panel-info">
