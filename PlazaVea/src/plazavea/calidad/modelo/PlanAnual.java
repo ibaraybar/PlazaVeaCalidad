@@ -1,5 +1,7 @@
 package plazavea.calidad.modelo;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 public class PlanAnual {
@@ -10,7 +12,22 @@ public class PlanAnual {
 	private int estado;
 	private int aprobadoPor;
 	private Date fechaAprobacion;
+	private Collection<DetallePlanAnual> inspecciones = new ArrayList<DetallePlanAnual>();
+	private Collection<PoliticaCalidad> politicas = new ArrayList<PoliticaCalidad>();
 	
+	
+	public Collection<DetallePlanAnual> getInspecciones() {
+		return inspecciones;
+	}
+	public void setInspecciones(Collection<DetallePlanAnual> inspecciones) {
+		this.inspecciones = inspecciones;
+	}
+	public Collection<PoliticaCalidad> getPoliticas() {
+		return politicas;
+	}
+	public void setPoliticas(Collection<PoliticaCalidad> politicas) {
+		this.politicas = politicas;
+	}
 	public int getIdPlan() {
 		return idPlan;
 	}
