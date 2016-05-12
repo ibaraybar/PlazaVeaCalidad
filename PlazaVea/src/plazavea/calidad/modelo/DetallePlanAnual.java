@@ -56,7 +56,7 @@ public class DetallePlanAnual {
 		case 1:
 			nombreTipoInspeccion="En Tienda";
 		case 2:
-			nombreTipoInspeccion="Todo el Almacén";
+			nombreTipoInspeccion="En Almacén";
 		}
 		
 		return nombreTipoInspeccion;

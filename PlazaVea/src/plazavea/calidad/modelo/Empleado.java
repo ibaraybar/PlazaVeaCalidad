@@ -52,5 +52,9 @@ public class Empleado {
 		this.celular = celular;
 	}
 	
+	public String getNombreCompleto() {
+		String nombreCompleto = this.nombres + " " + this.apellidoPaterno + " " + this.apellidoMaterno;
+		return nombreCompleto;
+	}
 	
 }

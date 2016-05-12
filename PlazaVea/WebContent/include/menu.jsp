@@ -30,7 +30,7 @@
                             <li><a href="#">Generar Plantilla de Informe de Gestión</a></li>
                             <li><a href="#">Generar Plantilla de Hoja de Trabajo</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="plan-anual.jsp">Registrar Plan de Trabajo Anual</a></li>
+                            <li><a href="RegistrarPlanAnualServlet">Registrar Plan de Trabajo Anual</a></li>
                             <li><a href="#">Aprobar Plan de Trabajo Anual</a></li>
                         </ul>
                     </li>
