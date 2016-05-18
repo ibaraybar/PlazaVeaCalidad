@@ -16,10 +16,9 @@
 		<!-- Inicio del contenido -->
 		<div class="page-header">
 			<h2>Pol&iacute;tica Interna de Calidad</h2>
-			Criterios de B&uacute;squeda
 		</div>
 
-		<form class="form-horizontal" role="form" method="post" action="ConsultarPoliticasCalidadServlet">
+		<form class="form-horizontal" role="form" method="post" action="DetallePoliticaCalidadServlet">
 			<%@page import="java.util.ArrayList, plazavea.calidad.modelo.PoliticaCalidad"%>
 			<%
 				
@@ -30,7 +29,7 @@
 			%>
 			<div class="form-group">
 				<label class="col-md-2 control-label" for="lblidpolitica" id="lblidpolitica">C&oacute;digo Pol&iacute;tica:</label>
-				<div class="col-md-8">
+				<div class="col-md-2">
 					<input class="form-control" type="text" name="txtidpolitica" id="txtidpolitica" disabled="disabled" value="<%=politicaCalidad.getIdPolitica()%>" />
 				</div>
 				<label class="col-md-2 control-label" for="lblaniopolitica" id="lblaniopolitica">Año Pol&iacute;tica:</label>
@@ -108,10 +107,6 @@
 					        	<label for="lbl01" class="col-sm-3 control-label" id=lbl01>C&oacute;digo Pol&iacute;tica:</label>
 					            <div class="col-sm-3">
 					            	<input type="text" class="form-control" id="txtcodpolitica" name="txtcodpolitica" value="<%=request.getParameter("idPolitica")%>" disabled>
-					            </div>
-					        	<label for="lbl04" class="col-sm-3 control-label" id=lbl04>Item nro.:</label>
-					            <div class="col-sm-3">
-					            	<input type="text" class="form-control" id="txtitem" name="txtitem" disabled>
 					            </div>
 					        </div>
 					        <div class="form-group">

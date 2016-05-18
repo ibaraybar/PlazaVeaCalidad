@@ -12,6 +12,7 @@ public class PlanAnual {
 	private int estado;
 	private int aprobadoPor;
 	private Date fechaAprobacion;
+	private String motivoRechazo;
 	private Collection<DetallePlanAnual> inspecciones = new ArrayList<DetallePlanAnual>();
 	private Collection<PoliticaCalidad> politicas = new ArrayList<PoliticaCalidad>();
 	
@@ -64,6 +65,12 @@ public class PlanAnual {
 	public void setFechaAprobacion(Date fechaAprobacion) {
 		this.fechaAprobacion = fechaAprobacion;
 	}
+	public String getMotivoRechazo() {
+		return motivoRechazo;
+	}
+	public void setMotivoRechazo(String motivoRechazo) {
+		this.motivoRechazo = motivoRechazo;
+	}
 	
 	public String getNombreEstado() {
 		String nombreEstado="";
@@ -79,6 +86,9 @@ public class PlanAnual {
 			nombreEstado="Aprobado";
 			break;
 		case 3: 
+			nombreEstado="Rechazado";
+			break;
+		case 4: 
 			nombreEstado="No Vigente";
 			break;
 		}

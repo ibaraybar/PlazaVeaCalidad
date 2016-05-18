@@ -22,81 +22,71 @@
 		<ol class="breadcrumb">
 			<li><a href="#">Inicio</a></li>
 			<li><a href="#">Planificaci&oacute;n Anual</a></li>
-			<li class="active">Pol&iacute;ticas Internas de Calidad</li>
+			<li class="active">Aprobar Plan de Trabajo Anual</li>
 		</ol>
 
 		<div class="page-header">
-			<h2>Pol&iacute;ticas Internas de Calidad</h2>
+			<h2>Planes de Trabajo Anuales</h2>
 		</div>
 		
-		<form role="form" method="post" id="formBuscar" name="formBuscar" action="PoliticaCalidadServlet" >
-			
-			<div class="row form-group">
-				<label class="col-sm-2 control-label" for="lblpolitica" id="lblpolitica">Pol&iacute;tica de Calidad:</label>
-				<div class="col-sm-10">
-					<input class="form-control" type="text" name="txtpolitica" id="txtpolitica" />
-				</div>
-			</div>
-			
+		<form role="form" method="post" id="formBuscar" name="formBuscar" action="AprobarPlanAnualServlet" >
+					
 			<div class="row form-group">
 				<label for="lblanio" class="col-sm-1 control-label">Año:</label>
-				<label for="lbldesde" class="col-sm-1 control-label">Desde:</label>
 				<div class="col-sm-2">
-					<input type="number" name="txtanioDesde" id="txtanioDesde" class="form-control" />
-				</div>
-				<label for="lblhasta" class="col-sm-1 control-label">Hasta:</label>
-				<div class="col-sm-2">
-					<input type="number" name="txtanioHasta" id="txtanioHasta" class="form-control" />
+					<input type="number" name="txtanio" id="txtanio" class="form-control" />
 				</div>
 				<label for="lblestado" class="col-sm-1 control-label">Estado:</label>
 				<div class="col-sm-4">
 					<select name="selestado" id="selestado" class="form-control">
-					  <option value="0">Todos</option>
-					  <option value="1">Activo</option>
-					  <option value="2">Inactivo</option>
+					  <option value="-1">Todos</option>
+					  <option value="0">Registrado</option>
+					  <option value="1">Pendiente de Aprobación</option>
+					  <option value="2">Aprobado</option>
+					  <option value="3">Rechazado</option>
+					  <option value="4">No Vigente</option>
 					</select>
+				</div>
+				<div class="col-md-offset-3 col-md-1">
+					<input type="button" value="Buscar" class="btn btn-primary" onclick="buscar()" />
 				</div>
 			</div>
 			
 			<input type="hidden" name="txtaccion" value=" "/>
-			<div class="row form-group">
-				<div class="col-md-offset-8 col-md-1">
-					<input type="button" value="Buscar" class="btn btn-primary" onclick="buscar()" />
-				</div>
-				<div class="col-md-1">
-					<input type="button" value="Limpiar" class="btn btn-primary" onclick="limpiarCriteriosBusqueda()" />
-				</div>
-				<div class="col-md-2">
-					<input type="button" value="Crear Política Calidad" class="btn btn-primary" data-toggle="modal" data-target="#modal-crear-politica" />
-				</div>
-			</div>
 		</form>
-		
+		<br>
 		<div class="row">
 		   	<div class="col-md-12">
 		   		<div class="table-responsive">
 				<table class="table table-striped table-bordered table-hover">
 					<tr>
 						<th>C&oacute;digo</th>
-						<th>Pol&iacute;tica de Calidad</th>
-						<th>Año</th>
+						<th>Año Plan</th>
+						<th>Descripción del Plan</th>
 						<th>Estado</th>
-						<th>Acciones</th>
+						<th></th>
 					</tr>
 					
-					<%@page import="java.util.ArrayList, plazavea.calidad.modelo.PoliticaCalidad"%>
+					<%@page import="java.util.ArrayList, plazavea.calidad.modelo.PlanAnual"%>
 					<%
 						
-						ArrayList<PoliticaCalidad> pcalidad = (ArrayList<PoliticaCalidad>) request.getAttribute("PCALIDAD_REGISTRADAS");
+						ArrayList<PlanAnual> planes = (ArrayList<PlanAnual>) request.getAttribute("PANUALES_REGISTRADOS");
 						
-						if (pcalidad != null) {
-							for (PoliticaCalidad x : pcalidad) {							
+						if (planes != null) {
+							for (PlanAnual x : planes) {							
 								out.println("<tr>");
-								out.println("<td align='center'>" + x.getIdPolitica() + "</td>");
-								out.println("<td>" + x.getNombre() + "</td>");
-								out.println("<td align='center'>" + x.getAnio() + "</td>");
-								out.println("<td align='center'>" + x.getDescripcionActivo() + "</td>");
-								out.println("<td align='center'><a href='#' class='btn btn-warning' data-toggle='modal' data-target='#modal-editar-politica' onclick='mostrarPoliticaEditar(" + x.getIdPolitica() + ",\"" + x.getAnio() + "\",\"" + x.getNombre() + "\",\"" + x.getDescripcion() + "\")'>Editar</a> <a href='#' class='btn btn-danger' data-toggle='modal' data-target='#modal-confirm-delete' onclick='mostrarIdEliminar(" + x.getIdPolitica() + ")'>Eliminar</a> <a href='DetallePoliticaCalidadServlet?idPolitica=" + x.getIdPolitica() + " ' class='btn btn-info'>Detalle</a></td>");
+								out.println("<td align='center'>" + x.getIdPlan() + "</td>");
+								out.println("<td align='center'>" + x.getAnioVigencia() + "</td>");
+								out.println("<td>" + x.getDescripcion() + "</td>");
+								out.println("<td align='center'>" + x.getNombreEstado() + "</td>");
+								
+								if (x.getEstado() == 1) {
+									out.println("<td align='center'><a href='#' class='btn btn-info'>Ver</a> <a href='#' class='btn btn-primary' data-toggle='modal' data-target='#modal-confirm-aprobar' onclick='mostrarIdAprobar(" + x.getIdPlan() + ")'>Aprobar</a> <a href='#' class='btn btn-danger' onclick='rechazar()'>Rechazar</a></td>");
+									//out.println("<td align='center'><a href='#' class='btn btn-warning' data-toggle='modal' data-target='#modal-editar-politica' onclick='mostrarPoliticaEditar(" + x.getIdPolitica() + ",\"" + x.getAnio() + "\",\"" + x.getNombre() + "\",\"" + x.getDescripcion() + "\")'>Editar</a> <a href='#' class='btn btn-danger' data-toggle='modal' data-target='#modal-confirm-delete' onclick='mostrarIdEliminar(" + x.getIdPolitica() + ")'>Eliminar</a> <a href='DetallePoliticaCalidadServlet?idPolitica=" + x.getIdPolitica() + " ' class='btn btn-info'>Detalle</a></td>");	
+								} else {
+									out.println("<td align='center'><a href='#' class='btn btn-info'>Ver</a></td>");
+								}
+								
 								out.println("</tr>");
 							}
 						} 	
@@ -104,6 +94,7 @@
 					
 				</table>
 				</div>
+				
 				
 				<div class="modal fade" id="modal-crear-politica" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				  <div class="modal-dialog modal-md">
@@ -145,7 +136,7 @@
 				  </div>
 				</div>
 				
-				<div class="modal fade" id="modal-confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal fade" id="modal-confirm-aprobar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				  <div class="modal-dialog modal-md">
 					<div class="modal-content">
 					  <div class="modal-header">
@@ -153,14 +144,14 @@
 						<h4 class="modal-title" id="myModalLabel">Eliminar Pol&iacute;tica Interna de Calidad</h4>
 					  </div>
 					  <div class="modal-body">
-					  	<form class="form-horizontal" role="form" method="post" id="formEliminar" name="formEliminar" action="PoliticaCalidadServlet">
-					  		<p>¿ Est&aacute; seguro de Eliminar la Pol&iacute;tica de Calidad seleccionada y sus detalle de Condiciones ?</p>
-					  		<input type="hidden" name="txtHiddenIdPC" value=" "/>
+					  	<form class="form-horizontal" role="form" method="post" id="formAprobar" name="formAprobar" action="AprobarPlanAnualServlet">
+					  		<p>¿ Est&aacute; seguro de Aprobar el Plan seleccionado ?</p>
+					  		<input type="hidden" name="txtPlanAprueba" value=" "/>
 					  		<input type="hidden" name="txtaccion" value=" "/>
 					  		
 					  		<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-								<button type="button" class="btn btn-primary" onclick="eliminar()">S&iacute;</button>
+								<button type="button" class="btn btn-primary" onclick="aprobar()">S&iacute;</button>
 							</div>
 					  	</form>				
 					  </div>
@@ -221,7 +212,8 @@
 	<%
 	HttpSession sesion = request.getSession();
 	String insertarOK = (String)sesion.getAttribute("INSERTAR_OK");
-	String eliminarOK = (String)sesion.getAttribute("ELIMINAR_OK");
+	String aprobarOK = (String)sesion.getAttribute("APROBAR_OK");
+	String rechazarOK = (String)sesion.getAttribute("RECHAZAR_OK");
 				
 	if (insertarOK == "SI") {
 	%>
@@ -239,22 +231,30 @@
 	<%
 	sesion.setAttribute("INSERTAR_OK","NO");
 	}
-	if (eliminarOK == "SI") {
+	if (aprobarOK == "SI") {
 	%>
 	<script>
-		bootbox.alert("La Politica de Calidad se eliminó correctamente.");
+		bootbox.alert("El Plan de Trabajo Anual se aprobó correctamente.");
 	</script>
 	<%
-	sesion.setAttribute("ELIMINAR_OK","NO");
+	sesion.setAttribute("APROBAR_OK","NO");
 	}
-	if (eliminarOK == "NO_PLAN") {
+	if (aprobarOK == "NO_PLAN") {
 	%>
 	<script>
 		bootbox.alert("La Politica de Calidad se encuentra asignada a uno o más Planes de Trabajo Anuales. No podrá eliminarla.");
 	</script>
 	<%
-	sesion.setAttribute("ELIMINAR_OK","NO");
+	sesion.setAttribute("APROBAR_OK","NO");
 	}
+	if (rechazarOK == "SI") {
+		%>
+		<script>
+			bootbox.alert("El Plan de Trabajo Anual se rechazó.");
+		</script>
+		<%
+		sesion.setAttribute("RECHAZAR_OK","NO");
+		}
 	%>
 	
 	<script type="text/javascript">
@@ -266,22 +266,8 @@
 		}
 		
 		function buscar() { 
-			var anioDesde = $('input[name="txtanioDesde"] ').val();
-			var anioHasta = $('input[name="txtanioHasta"] ').val();
-			//alert(anioDesde + " " + anioHasta);
-			
-			/*
-			int aDes = parseInt("0" + anioDesde);
-			int aHas = parseInt("0" + anioHasta);
-			
-			alert(anioDesde + anioHasta);
-			*/
-			if (anioHasta < anioDesde) {
-				bootbox.alert("Por favor, ingrese un rango de años válido.");
-			} else {
-				$('input[name="txtaccion"] ').val('buscar');
-				$('form#formBuscar').submit();	
-			}
+			$('input[name="txtaccion"] ').val('buscar');
+			$('form#formBuscar').submit();	
 		}
 		
 		function insertar() { 
@@ -289,13 +275,32 @@
 			$('form#formInsertar').submit();
 		};
 		
-		function eliminar() { 
-			$('input[name="txtaccion"] ').val('eliminar');
-			$('form#formEliminar').submit();
+		function aprobar() { 
+			$('input[name="txtaccion"] ').val('aprobar');
+			$('form#formAprobar').submit();
 		};
 		
-		function mostrarIdEliminar(idPCal) {
-			$('input[name="txtHiddenIdPC"] ').val(idPCal);
+		function mostrarIdAprobar(idPlan) {
+			$('input[name="txtPlanAprueba"] ').val(idPlan);
+		}
+		
+		function rechazar(idPlan) { 
+			//$('input[name="txtaccion"] ').val('rechazar');
+			//$('form#formRechazar').submit();
+			
+			bootbox.prompt("¿ Está seguro de Rechazar el Plan? De ser así ingrese el Motivo de Rechazo.", function(result) {                
+				if (result === null) {                                             
+					bootbox.alert("Debe ingresar un motivo de rechazo");                              
+				} else {
+					//$('input[name="txtPlanRechaza"] ').val(idPlan);
+					//$('input[name="txtaccion"] ').val('rechazar');
+					//$('form#formAprobar').submit();
+				}
+			});
+		};
+		
+		function mostrarIdRechazar(idPlan) {
+			$('input[name="txtPlanRechaza"] ').val(idPlan);
 		}
 		
 		function mostrarPoliticaEditar(pIdPC, pAnioPC, pNomPC, pDesPC) {

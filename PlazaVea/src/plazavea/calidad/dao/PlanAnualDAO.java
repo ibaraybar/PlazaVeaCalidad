@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import plazavea.calidad.excepcion.DAOExcepcion;
 import plazavea.calidad.util.ConexionBD;
@@ -101,6 +103,127 @@ public class PlanAnualDAO extends BaseDAO {
 			this.cerrarConexion(con);
 		}
 		return vo;
+	}
+	
+	public Collection<PlanAnual> buscar(int anio, int estado) throws DAOExcepcion {
+		Collection<PlanAnual> plan = new ArrayList<PlanAnual>();
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			con = ConexionBD.obtenerConexion();
+			String query = "";
+			
+			if (anio==0 && estado==-1) {
+				query = "Select id_plan, anio_vigencia, descripcion, estado From t_plan_anual; ";
+				stmt = con.prepareStatement(query);
+			} else if (anio!=0 && estado==-1) {
+				query = "Select id_plan, anio_vigencia, descripcion, estado From t_plan_anual "
+						+ "Where anio_vigencia = ?;";
+				stmt = con.prepareStatement(query);
+				stmt.setInt(1, anio);
+			} else if (anio==0 && estado!=-1) {
+				query = "Select id_plan, anio_vigencia, descripcion, estado From t_plan_anual "
+						+ "Where estado = ?;";
+				stmt = con.prepareStatement(query);
+				stmt.setInt(1, estado);
+			} else if (anio!=0 && estado!=-1) {
+				query = "Select id_plan, anio_vigencia, descripcion, estado From t_plan_anual "
+						+ "Where anio = ? and estado = ?;";
+				stmt = con.prepareStatement(query);
+				stmt.setInt(1, anio);
+				stmt.setInt(2, estado);
+			}
+			
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				PlanAnual vo = new PlanAnual();
+				vo.setIdPlan(rs.getInt("id_plan"));
+				vo.setAnioVigencia(rs.getInt("anio_vigencia"));
+				vo.setDescripcion(rs.getString("descripcion"));
+				vo.setEstado(rs.getInt("estado"));
+				
+				plan.add(vo);
+			}
+
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOExcepcion(e.getMessage());
+		} finally {
+			this.cerrarResultSet(rs);
+			this.cerrarStatement(stmt);
+			this.cerrarConexion(con);
+		}
+		return plan;
+	}
+	
+	public Collection<PlanAnual> buscarPorPolitica(int idPolitica) throws DAOExcepcion {
+		Collection<PlanAnual> plan = new ArrayList<PlanAnual>();
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			con = ConexionBD.obtenerConexion();
+			String query = "Select b.id_plan, b.anio_vigencia, b.descripcion, b.estado "
+					+ "From dbo.t_plan_politica_calidad As a Left Join dbo.t_plan_anual As b On (a.id_plan=b.id_plan) "
+					+ "Where a.id_politica=?;";
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, idPolitica);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				PlanAnual vo = new PlanAnual();
+				vo.setIdPlan(rs.getInt("id_plan"));
+				vo.setAnioVigencia(rs.getInt("anio_vigencia"));
+				vo.setDescripcion(rs.getString("descripcion"));
+				vo.setEstado(rs.getInt("estado"));
+				
+				plan.add(vo);
+			}
+
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOExcepcion(e.getMessage());
+		} finally {
+			this.cerrarResultSet(rs);
+			this.cerrarStatement(stmt);
+			this.cerrarConexion(con);
+		}
+		return plan;
+	}
+	
+	public void actualizarEstado(int idPlan, int estado, int aprobadoPor, String motivoRechazo) throws DAOExcepcion {
+		//System.out.println("PersonaDAO: eliminar(String personaNombre)");
+		String query ="";
+		
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = ConexionBD.obtenerConexion();
+			
+			if (estado==2) {
+				query = "UPDATE t_plan_anual SET estado=2, aprobado_por=?, fecha_aprobacion=GetDate() WHERE id_plan=?;";
+				stmt = con.prepareStatement(query);
+				stmt.setInt(1, aprobadoPor);
+				stmt.setInt(2, idPlan);
+			} else if (estado==3) {
+				query = "UPDATE t_plan_anual SET estado=3, motivo_rechazo=? WHERE id_plan=?;";
+				stmt = con.prepareStatement(query);
+				stmt.setString(1, motivoRechazo);
+				stmt.setInt(2, idPlan);
+			}
+			
+			int i = stmt.executeUpdate();
+			if (i != 1) {
+
+				throw new SQLException("No se pudo actualizar el estado");
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOExcepcion(e.getMessage());
+		} finally {
+			this.cerrarStatement(stmt);
+			this.cerrarConexion(con);
+		}
 	}
 
 }

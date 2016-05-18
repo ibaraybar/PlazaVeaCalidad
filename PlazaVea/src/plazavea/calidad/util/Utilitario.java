@@ -62,6 +62,22 @@ public class Utilitario {
 		return date;
 	}
 	
+	public static Date fnFecha2(String _fecha){
+		
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = null;
+		
+		try {
+			date = format.parse(_fecha);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return date;
+	}
+	
 	public static String fnFechaHora(Date _fecha){		
 		SimpleDateFormat ft = new SimpleDateFormat ("dd-MM-yyyy HH:mm");
 		return ft.format(_fecha);		

@@ -5,7 +5,10 @@
                 <button type="button" class="navbar-toggle collapsed"
                         data-toggle="collapse" data-target="#navbar" aria-expanded="false"
                         aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="sr-only">Toggle navigation</span> 
+                    <span class="icon-bar"></span> 
+                    <span class="icon-bar"></span> 
+                    <span class="icon-bar"></span>
                 </button>
 
                 <a class="navbar-brand navbar-logo" href="#"><img src="img/logo.png" height="48" /></a>
@@ -31,7 +34,7 @@
                             <li><a href="#">Generar Plantilla de Hoja de Trabajo</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="RegistrarPlanAnualServlet">Registrar Plan de Trabajo Anual</a></li>
-                            <li><a href="#">Aprobar Plan de Trabajo Anual</a></li>
+                            <li><a href="AprobarPlanAnualServlet">Aprobar Plan de Trabajo Anual</a></li>
                         </ul>
                     </li>
 					<li class="dropdown">

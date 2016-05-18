@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import plazavea.calidad.excepcion.DAOExcepcion;
+import plazavea.calidad.modelo.PlanAnual;
 import plazavea.calidad.modelo.PoliticaCalidad;
+import plazavea.calidad.negocio.GestionPlanesAnuales;
 import plazavea.calidad.negocio.GestionPoliticasCalidad;
 
 /**
@@ -33,6 +35,10 @@ public class PoliticaCalidadServlet extends HttpServlet {
     public PoliticaCalidadServlet() {
         super();
         // TODO Auto-generated constructor stub
+        buscarOK = "NO";
+		insertarOK = "NO";
+		eliminarOK = "NO";
+		editarOK = "NO";
     }
 
 	/**
@@ -40,6 +46,11 @@ public class PoliticaCalidadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		buscarOK = "NO";
+		insertarOK = "NO";
+		eliminarOK = "NO";
+		editarOK = "NO";
+		
 		GestionPoliticasCalidad negocioPCal = new GestionPoliticasCalidad();
 		try {
 			Collection<PoliticaCalidad> listaPCal = negocioPCal.listar();
@@ -61,6 +72,14 @@ public class PoliticaCalidadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession sesion = request.getSession();
+		buscarOK = "NO";
+		insertarOK = "NO";
+		eliminarOK = "NO";
+		editarOK = "NO";
+		sesion.setAttribute("ELIMINAR_OK",eliminarOK);
+		sesion.setAttribute("BUSCAR_OK",buscarOK);
+		sesion.setAttribute("INSERTAR_OK",insertarOK);
+		sesion.setAttribute("EDITAR_OK",editarOK);
 		
 		String accion = request.getParameter("txtaccion");
 		System.out.println(accion);
@@ -101,8 +120,12 @@ public class PoliticaCalidadServlet extends HttpServlet {
 			GestionPoliticasCalidad negocioPC = new GestionPoliticasCalidad();
 			try {
 				negocioPC.registrarPoliticaCalidad(anioPC, nomPolitica, descPolitica);
+				insertarOK="SI";
+				sesion.setAttribute("INSERTAR_OK",insertarOK);
 				response.sendRedirect(request.getContextPath()	+ "/PoliticaCalidadServlet");
 			} catch (DAOExcepcion e) {
+				insertarOK="NO";
+				sesion.setAttribute("INSERTAR_OK",insertarOK);
 				RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
 				rd.forward(request, response);
 			}
@@ -110,13 +133,28 @@ public class PoliticaCalidadServlet extends HttpServlet {
 		else if (accion.equalsIgnoreCase("eliminar")) {
 			String idPC = request.getParameter("txtHiddenIdPC");
 			int idPolitica = Integer.parseInt(idPC);
-					
-			GestionPoliticasCalidad negocioPC = new GestionPoliticasCalidad();
+			
+			GestionPlanesAnuales negocioPA = new GestionPlanesAnuales();
 			try {
-				negocioPC.eliminar(idPolitica);
-				eliminarOK="SI";
-				sesion.setAttribute("ELIMINAR_OK",eliminarOK);
-				response.sendRedirect(request.getContextPath()	+ "/PoliticaCalidadServlet");
+				Collection<PlanAnual> planesAsignados = negocioPA.buscarPorPolitica(idPolitica); 
+				if (!planesAsignados.isEmpty()) {
+					eliminarOK="NO_PLAN";
+					sesion.setAttribute("ELIMINAR_OK",eliminarOK);
+					response.sendRedirect(request.getContextPath()	+ "/PoliticaCalidadServlet");
+				} else {
+					GestionPoliticasCalidad negocioPC = new GestionPoliticasCalidad();
+					try {
+						negocioPC.eliminar(idPolitica);
+						eliminarOK="SI";
+						sesion.setAttribute("ELIMINAR_OK",eliminarOK);
+						response.sendRedirect(request.getContextPath()	+ "/PoliticaCalidadServlet");
+					} catch (DAOExcepcion e) {
+						eliminarOK="NO";
+						sesion.setAttribute("ELIMINAR_OK",eliminarOK);
+						RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
+						rd.forward(request, response);
+					}
+				}
 			} catch (DAOExcepcion e) {
 				eliminarOK="NO";
 				sesion.setAttribute("ELIMINAR_OK",eliminarOK);

@@ -115,7 +115,7 @@
 			
 			<div class="row form-group">
 				<div class="col-md-offset-10 col-md-2">
-					<button type="button" class="btn btn-primary btn-block" onclick="buscar()">
+					<button type="button" class="btn btn-primary btn-block" onclick="grabarPlanAnual()">
 						<span class="glyphicon glyphicon-save" aria-hidden="true"></span> Grabar
 					</button>
 				</div>
@@ -185,9 +185,12 @@
 						<form class="form-horizontal" role="form" method="post" id="formInspeccion" name="formInspeccion" action="RegistrarPlanAnualServlet">
 					  		<div class="form-group">
 					        	<label for="lbl01" class="col-sm-3 control-label" id=lbl01>Fecha Inspecci&oacute;n:</label>
-					            <div class="col-sm-3">
-					            	<input type="date" class="form-control" id="txtfechaInspeccion" name="txtfechaInspeccion">
-					            </div>
+					        	<div class='col-sm-3 input-group date' id='dtpfechaInspeccion'>
+				                    <input type='text' class="form-control" id="txtfechaInspeccion" name="txtfechaInspeccion" />
+				                    <span class="input-group-addon">
+				                        <span class="glyphicon glyphicon-calendar"></span>
+				                    </span>
+				                </div>
 					        </div>
 					        <div class="form-group">
 					        	<label for="lbl02" class="col-sm-3 control-label" id=lbl02>Local de Inspecci&oacute;n:</label>
@@ -267,7 +270,7 @@
 			var idTR = "id='trA" + pIdPC + "'"
 			var centrado = "align='center'"
 			var botones = "<td align='center' style='width: 160px'><a href='DetallePoliticaCalidadServlet?idPolitica=" + pIdPC + " ' class='btn btn-info'>Ver</a> <a href='#' class='btn btn-danger' onclick='removerPolitica(" + pIdPC + ",\"" + pNomPC + "\",\"" + pAnioPC + "\",\"" + pDesPC + "\")'>Remover</a></td>";
-			$('#tblPCAsignadas tr:last').after('<tr ' + idTR + '><td ' + centrado + '>' + pIdPC  + '</td><td>' + pNomPC  + '</td><td ' + centrado + '>' + pAnioPC  + '</td><td>' + pDesPC  + '</td>' + botones + '</tr>');
+			$('#tblPCAsignadas tr:last').after('<tr ' + idTR + '><td ' + centrado + '>' + pIdPC  + '<input type="hidden" name="t_idpc" id="t_idpc" value="'+ pIdPC +'"></td><td>' + pNomPC  + '</td><td ' + centrado + '>' + pAnioPC  + '</td><td>' + pDesPC  + '</td>' + botones + '</tr>');
 			$('#trP' + pIdPC).remove();
 			$("#tblPCAsignadas").sortTable("number", {column: 1, reverse: false});
 		}
@@ -286,16 +289,21 @@
 			//alert(pIdPC + " " + pNomPC + " " + pAnioPC + " " + pDesPC);
 			var fechaInsp = $('#txtfechaInspeccion').val();
 			var local = $("#txtlocal option:selected").text();
+			var idlocal = $("#txtlocal option:selected").val();
 			var tipoInsp = $("#txttipoinsp option:selected").text();
+			var idtipoInsp = $("#txttipoinsp option:selected").val();
 			var respo = $("#txtresponsable option:selected").text();
+			var idrespo = $("#txtresponsable option:selected").val();
 			var observa = $('#txtobserva').val();
+			
+			//alert(idlocal + " " + local);
 			
 			nroItem++;
 			var idINSP = "id='trI" + nroItem + "'"
 			
 			var centrado = "align='center'"
 			var botones = "<td align='center' style='width: 180px'><a href='#' class='btn btn-warning'>Editar</a> <a href='#' class='btn btn-danger' onclick='eliminarInspeccion(" + nroItem + ")'>Eliminar</a></td>";
-			$('#tblInspecciones tr:last').after('<tr ' + idINSP + '><td ' + centrado + '>' + nroItem + '</td><td ' + centrado + '>' + fechaInsp  + '</td><td>' + local  + '</td><td>' + tipoInsp  + '</td><td>' + respo  + '</td><td>' + observa  + '</td>' + botones + '</tr>');
+			$('#tblInspecciones tr:last').after('<tr ' + idINSP + '><td ' + centrado + '>' + nroItem + '<input type="hidden" name="t_item" id="t_item" value="'+ nroItem +'"></td><td ' + centrado + '>' + fechaInsp  + '<input type="hidden" name="t_fecinsp" id="t_fecinsp" value="'+ fechaInsp +'"></td><td>' + local  + '<input type="hidden" name="t_local" id="t_local" value="'+ idlocal +'"></td><td>' + tipoInsp  + '<input type="hidden" name="t_tipinsp" id="t_tipinsp" value="'+ idtipoInsp +'"></td><td>' + respo  + '<input type="hidden" name="t_respo" id="t_respo" value="'+ idrespo +'"></td><td>' + observa  + '<input type="hidden" name="t_observa" id="t_observa" value="'+ observa +'"></td>' + botones + '</tr>');
 			limpiarDatosInspeccion();
 		}
 		
@@ -310,6 +318,19 @@
 			$('#txtresponsable').val('');
 			$('#txtobserva').val('');
 		}
+		
+		function grabarPlanAnual() {
+			bootbox.alert("El Plan Anual se grabó correctamente.", function() {
+				$('form#formPlan').submit();	
+			});
+		}
 	</script>
+	<script type="text/javascript">
+        $(function () {
+        	$('#dtpfechaInspeccion').datetimepicker({
+        		format: 'DD/MM/YYYY'
+        	});
+        });
+    </script>
 </body>
 </html>
